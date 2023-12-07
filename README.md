@@ -18,7 +18,6 @@ cd ComfyUI/custom_nodes/
 git clone https://github.com/thecooltechguy/ComfyUI-MagicAnimate
 cd ComfyUI-MagicAnimate/
 python -m pip install -r requirements.txt
-python prestartup_script.py # This will download all the necessary model checkpoints
 ```
 
 ## Node types
