@@ -57,7 +57,8 @@ class MagicAnimateModelLoader:
     def load_model(self, controlnet, appearance_encoder, motion_module, device):
         if self.models:
             # delete old models
-            for key in self.models.keys():
+            all_keys = list(self.models.keys())
+            for key in all_keys:
                 # clear memory
                 del self.models[key]
             self.models = {}
@@ -195,11 +196,16 @@ class MagicAnimate:
     CATEGORY = "ComfyUI Magic Animate"
 
     def resize_image_frame(self, image_tensor, size):
+        # if image_tensor is a numpy array, convert it to a tensor
+        if isinstance(image_tensor, np.ndarray):
+            image_tensor = torch.from_numpy(image_tensor)
         # permute to C x H x W
         image_tensor = rearrange(image_tensor, 'h w c -> c h w')
         # print(image.shape)
         image_tensor = ToPILImage()(image_tensor)
+        # print(image_tensor.shape)
         image_tensor = image_tensor.resize((size, size))
+        # print(image_tensor.shape)
         image_tensor = ToTensor()(image_tensor)
         # permute back to H x W x C
         image_tensor = rearrange(image_tensor, 'c h w -> h w c')
@@ -229,7 +235,7 @@ class MagicAnimate:
         prompt = ""
         n_prompt = ""
         control = pose_video.detach().cpu().numpy() # (num_frames, H, W, C)
-        # print("control shape:", control.shape)
+        print("control shape:", control.shape)
 
         if control.shape[1] != size or control.shape[2] != size:
             # resize each frame in control to be (size, size)
