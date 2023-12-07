@@ -19,7 +19,6 @@ from magicanimate.utils.util import save_videos_grid
 from magicanimate.utils.dist_tools import distributed_init
 from accelerate.utils import set_seed
 from collections import OrderedDict
-# from magicanimate.utils.videoreader import VideoReader
 
 class MagicAnimateModelLoader:
     def __init__(self):
@@ -27,8 +26,6 @@ class MagicAnimateModelLoader:
         
     @classmethod
     def INPUT_TYPES(s):
-        # checkpoints = folder_paths.get_filename_list("checkpoints")
-        # vaes = folder_paths.get_filename_list("vae")
         magic_animate_checkpoints = folder_paths.get_filename_list("magic_animate")
 
         devices = []
@@ -38,16 +35,6 @@ class MagicAnimateModelLoader:
 
         return {
             "required": {
-                # "model" : (checkpoints, {
-                #     "default" : checkpoints[0],
-                # }),
-                # "vae" : (vaes, {
-                #     "default" : vaes[0]
-                # })
-                # "model": ("MODEL",),
-                # "clip" : ("CLIP",),
-                # "vae" : ("VAE",),
-                # "controlnet" : ("CONTROL_NET",),
                 "controlnet" : (magic_animate_checkpoints ,{
                     "default" : magic_animate_checkpoints[0]
                 }),
@@ -88,13 +75,6 @@ class MagicAnimateModelLoader:
         config.pretrained_controlnet_path = os.path.join(magic_animate_models_dir, os.path.dirname(controlnet))
         motion_module = os.path.join(magic_animate_models_dir, motion_module)
         config.motion_module = motion_module
-
-        # print(magic_animate_models_dir)
-        # print(config.pretrained_appearance_encoder_path)
-        # print(config.pretrained_model_path)
-        # print(config.pretrained_vae_path)
-        # print(config.pretrained_controlnet_path)
-        # print(config.motion_module)
 
         ### >>> create animation pipeline >>> ###
         tokenizer = CLIPTokenizer.from_pretrained(config.pretrained_model_path, subfolder="tokenizer")
@@ -249,6 +229,7 @@ class MagicAnimate:
         prompt = ""
         n_prompt = ""
         control = pose_video.detach().cpu().numpy() # (num_frames, H, W, C)
+        # print("control shape:", control.shape)
 
         if control.shape[1] != size or control.shape[2] != size:
             # resize each frame in control to be (size, size)
@@ -290,41 +271,14 @@ class MagicAnimate:
 
         return (sample,)
 
-class MagicAnimateModelDebug:        
-    @classmethod
-    def INPUT_TYPES(s):
-        return {
-            "required": {
-                "model": ("MAGIC_ANIMATE_MODEL",),
-            },
-        }
-
-    # RETURN_TYPES = ("MAGIC_ANIMATE_MODEL",)
-
-    FUNCTION = "load_model"
-
-    CATEGORY = "ComfyUI Magic Animate"
-
-    OUTPUT_NODE = True
-
-    RETURN_TYPES = ()
-
-    def load_model(self, model):
-        print(model)
-        return ()
-
-
-
 # A dictionary that contains all nodes you want to export with their names
 NODE_CLASS_MAPPINGS = {
     "MagicAnimateModelLoader" : MagicAnimateModelLoader,
     "MagicAnimate" : MagicAnimate,
-    "MagicAnimateModelDebug" : MagicAnimateModelDebug,
 }
 
 # A dictionary that contains the friendly/humanly readable titles for the nodes
 NODE_DISPLAY_NAME_MAPPINGS = {
     "MagicAnimateModelLoader" : "Load Magic Animate Model",
     "MagicAnimate" : "Magic Animate",
-    "MagicAnimateModelDebug" : "Debug Magic Animate Model",
 }
