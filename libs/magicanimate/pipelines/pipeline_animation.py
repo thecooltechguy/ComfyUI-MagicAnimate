@@ -353,7 +353,7 @@ class AnimationPipeline(DiffusionPipeline):
 
     def prepare_condition(self, condition, num_videos_per_prompt, device, dtype, do_classifier_free_guidance):
         # prepare conditions for controlnet
-        condition = torch.from_numpy(condition.copy()).to(device=device, dtype=dtype) #/ 255.0
+        condition = torch.from_numpy(condition.copy()).to(device=device, dtype=dtype) / 255.0
         condition = torch.stack([condition for _ in range(num_videos_per_prompt)], dim=0)
         condition = rearrange(condition, 'b f h w c -> (b f) c h w').clone()
         if do_classifier_free_guidance:
@@ -389,7 +389,7 @@ class AnimationPipeline(DiffusionPipeline):
         Convert RGB image to VAE latents
         """
         device = self._execution_device
-        images = torch.from_numpy(images).float().to(dtype) # / 127.5 - 1
+        images = torch.from_numpy(images).float().to(dtype) / 127.5 - 1
         images = rearrange(images, "f h w c -> f c h w").to(device)
         latents = []
         for frame_idx in range(images.shape[0]):
