@@ -39,9 +39,9 @@ python -m pip install -r requirements.txt
 ![sample output](./workflow1.gif)
 
 ## TODO
-- [x] Fix white color in output (credits: @mingqizhang)
+- [x] Fix white color in output (credits: [@mingqizhang](https://github.com/thecooltechguy/ComfyUI-MagicAnimate/pull/11))
 - [x] Optimize amount of models downloaded (now requires 15GB and only downloads the models needed) 
-- [] Refactor to use any Model, VAE, and ControlNet input from ComfyUI (this should also further reduce number of models downloaded)
+- [ ] Refactor to use any Model, VAE, and ControlNet input from ComfyUI (this should also further reduce number of models downloaded)
 
 <!-- ### Animate any person's image using pose extracted from any video input
 [https://comfyworkflows.com/workflows/5a4cd9fd-9685-4985-adb8-7be84e8636ad](https://comfyworkflows.com/workflows/5a4cd9fd-9685-4985-adb8-7be84e8636ad)
