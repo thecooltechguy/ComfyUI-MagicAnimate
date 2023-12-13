@@ -229,7 +229,8 @@ class MagicAnimate:
             image = self.resize_image_frame(image, size)
             # print(image.shape)
             H, W, C = image.shape
-        
+            
+        image = image * 255 
         prompt = ""
         n_prompt = ""
         control = pose_video.detach().cpu().numpy() # (num_frames, H, W, C)
@@ -244,7 +245,7 @@ class MagicAnimate:
         original_length = control.shape[0]
         if control.shape[0] % config.L > 0:
             control = np.pad(control, ((0, config.L-control.shape[0] % config.L), (0, 0), (0, 0), (0, 0)), mode='edge')
-        
+        control = control * 255
         self.generator.manual_seed(seed)
 
         dist_kwargs = {"rank":0, "world_size":1, "dist":False}
