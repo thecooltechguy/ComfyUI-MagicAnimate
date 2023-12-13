@@ -13,6 +13,10 @@ Easily use Magic Animate within ComfyUI!
 Need help? <a href="https://discord.gg/hwwbNRAq6E">Join our Discord!</a>
 
 ## 1. Installation
+### Option 1: Automatic installation (Recommended)
+Please install "ComfyUI-MagicAnimate" via the ComfyUI-Manager.
+
+### Option 2: Manual installation
 ```
 cd ComfyUI/custom_nodes/
 git clone https://github.com/thecooltechguy/ComfyUI-MagicAnimate
