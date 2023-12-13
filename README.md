@@ -12,7 +12,7 @@ Easily use Magic Animate within ComfyUI!
 
 Need help? <a href="https://discord.gg/hwwbNRAq6E">Join our Discord!</a>
 
-## 1. Installation
+## 1. Installation (this custom node will auto-download ~15GB of model weights!)
 ### Option 1: Automatic installation (Recommended)
 Please install "ComfyUI-MagicAnimate" via the ComfyUI-Manager.
 
