@@ -19,6 +19,7 @@ from magicanimate.utils.util import save_videos_grid
 from magicanimate.utils.dist_tools import distributed_init
 from accelerate.utils import set_seed
 from collections import OrderedDict
+from PIL import Image
 
 class MagicAnimateModelLoader:
     def __init__(self):
@@ -89,10 +90,7 @@ class MagicAnimateModelLoader:
         reference_control_writer = ReferenceAttentionControl(appearance_encoder, do_classifier_free_guidance=True, mode='write', fusion_blocks=config.fusion_blocks)
         
         reference_control_reader = ReferenceAttentionControl(unet, do_classifier_free_guidance=True, mode='read', fusion_blocks=config.fusion_blocks)
-        if config.pretrained_vae_path is not None:
-            vae = AutoencoderKL.from_pretrained(config.pretrained_vae_path)
-        else:
-            vae = AutoencoderKL.from_pretrained(config.pretrained_model_path, subfolder="vae")
+        vae = AutoencoderKL.from_pretrained(config.pretrained_vae_path)
 
         ### Load controlnet
         controlnet   = ControlNetModel.from_pretrained(config.pretrained_controlnet_path)

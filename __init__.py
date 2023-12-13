@@ -7,6 +7,7 @@ sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), "libs"
 os.makedirs(os.path.join(folder_paths.models_dir, "MagicAnimate"), exist_ok=True)
 
 folder_paths.add_model_folder_path("magic_animate", os.path.join(folder_paths.models_dir, "MagicAnimate"))
+folder_paths.folder_names_and_paths['magic_animate'] = (folder_paths.folder_names_and_paths['magic_animate'][0], folder_paths.supported_pt_extensions) # | {'.json'})
 
 magic_animate_checkpoints = folder_paths.get_filename_list("magic_animate")
 
