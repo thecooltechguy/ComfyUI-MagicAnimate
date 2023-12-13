@@ -12,7 +12,7 @@ Easily use Magic Animate within ComfyUI!
 
 Need help? <a href="https://discord.gg/hwwbNRAq6E">Join our Discord!</a>
 
-## 1. Installation (this custom node will auto-download ~15GB of model weights!)
+## Installation (this custom node will auto-download ~15GB of model weights!)
 ### Option 1: Automatic installation (Recommended)
 Please install "ComfyUI-MagicAnimate" via the ComfyUI-Manager.
 
@@ -37,6 +37,11 @@ python -m pip install -r requirements.txt
 
 ![workflow graph](./workflow1_graph.png)
 ![sample output](./workflow1.gif)
+
+## TODO
+- [x] Fix white color in output (credits: @mingqizhang)
+- [x] Optimize amount of models downloaded (now requires 15GB and only downloads the models needed) 
+- [] Refactor to use any Model, VAE, and ControlNet input from ComfyUI (this should also further reduce number of models downloaded)
 
 <!-- ### Animate any person's image using pose extracted from any video input
 [https://comfyworkflows.com/workflows/5a4cd9fd-9685-4985-adb8-7be84e8636ad](https://comfyworkflows.com/workflows/5a4cd9fd-9685-4985-adb8-7be84e8636ad)
