@@ -1,0 +1,15 @@
+[project]
+name = "comfyui-magicanimate"
+description = "Easily use Magic Animate within ComfyUI!\n[w/WARN: This extension requires 15GB disk space.]"
+version = "1.0.0"
+license = "LICENSE"
+dependencies = ["diffusers", "omegaconf", "torchvision", "Pillow"]
+
+[project.urls]
+Repository = "https://github.com/thecooltechguy/ComfyUI-MagicAnimate"
+#  Used by Comfy Registry https://comfyregistry.org
+
+[tool.comfy]
+PublisherId = ""
+DisplayName = "ComfyUI-MagicAnimate"
+Icon = ""
